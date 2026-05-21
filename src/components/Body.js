@@ -13,6 +13,7 @@ const Body = () => {
   // Whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
   console.log("Body Rendered");
 
+  const CORS_PROXY = "https://corsproxy.io/?";
   useEffect(() => {
     // Called after Component has been rendered
     fetchData();
@@ -20,7 +21,10 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+      CORS_PROXY +
+        encodeURIComponent(
+          "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+        ),
     );
     const json = await data.json();
     // Optional Chaining: The optional chaining (?.) operator allows you to read properties or call functions from objects that might be null or undefined without causing a runtime error.
